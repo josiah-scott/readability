@@ -1,0 +1,63 @@
+package com.company;
+import java.util.Scanner;
+
+public class Main
+{
+
+    public static void main(String[] args)
+    {
+	// write your code here
+
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("Please enter a passage from a book: ");
+
+        String text = keyboard.nextLine();
+
+        int numberOfLetters = 0;
+        int numberOfWords = 1;
+        int numberOfSentences = 0;
+        int numberOfSpaces = 0;
+        int instancesOfPunctuation = 0;
+        char spaces;
+
+        for(int i = 0; i < text.length(); i++)
+        {
+            spaces = text.charAt(i);
+            if(spaces == ' ')
+            {
+                numberOfSpaces++;
+                numberOfWords++;
+            }
+
+            if(spaces == '.' || spaces == '!' || spaces == '?')
+            {
+                numberOfSentences++;
+            }
+        }
+
+        for(int j = 0; j < text.length(); j++)
+        {
+            if(Character.isLetter(text.charAt(j)))
+            {
+                numberOfLetters++;
+            }
+        }
+
+        int averageNumberOfLetters = (numberOfLetters * 100) / numberOfWords;
+        int averageNumberOfSentences = (numberOfSentences * 100) / numberOfWords;
+
+        double gradeLevel = 0.0588 * averageNumberOfLetters - 0.296 * averageNumberOfSentences - 15.8;
+
+        if(gradeLevel >= 16)
+        {
+            System.out.println("Grade 16+");
+        }
+        else
+        {
+            System.out.println("Grade " + Math.round(gradeLevel));
+        }
+
+
+    }
+}
